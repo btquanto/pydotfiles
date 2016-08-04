@@ -1,0 +1,10 @@
+{
+	"_gitconfig" : {
+		"email" : "me@example.com",
+		"name" : "Example"
+	},
+	"_bashrc" : {
+		"auto_attach_tmux_session" : true
+	},
+	"_bash_aliases" : {}
+}

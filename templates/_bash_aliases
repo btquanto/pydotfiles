@@ -1,0 +1,33 @@
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# some git aliases
+alias g="git"
+alias gl="git log --graph --oneline"
+alias gll="git log"
+alias gf="git fetch"
+alias gd="git d"
+alias gvi="vim -p \`git diff --name-only\`"
+alias gsub="sublime \`git diff --name-only\` &>/dev/null &"
+alias gitvim="vim -p \`git diff --name-only\`"
+
+# some useful aliases for my lazy ass
+alias fix_adb_permission="sudo chmod 4550 ~/Android/Sdk/platform-tools/adb && sudo chmod 4550 ~/Android/Sdk/platform-tools/adb"
+alias fix_fastboot_permission="sudo chmod 4550 ~/Android/Sdk/platform-tools/fastboot && sudo chmod 4550 ~/Android/Sdk/platform-tools/fastboot"
+alias swap_fn="echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode"
+alias fix_ssh="ssh-add -l &> /dev/null || eval `ssh-agent -s` && ssh-add"
+alias watch_mem="watch -n 5 free -m"

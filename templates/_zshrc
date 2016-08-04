@@ -1,0 +1,48 @@
+#!/bin/zsh
+
+. ~/.shrc
+
+bindkey -e
+zstyle ':completion:*' use-cache on
+
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
+export HISTFILE="$HOME/.history"
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_FCNTL_LOCK
+setopt HIST_LEX_WORDS
+setopt EXTENDED_GLOB
+
+if [[ -n $SSH_TTY || -n $SUDO_USER ]]
+then
+    host_color="%F{yellow}"
+else
+    host_color="%F{green}"
+fi
+
+if [[ $EUID == 0 ]]
+then
+    extra_style="%K{red}%S"
+fi
+
+export PS1="$extra_style%B%F{magenta}[%j] %F{white}%D{%H:%M} $host_color%n@%m %F{blue}%1~ %#%f%b%s "
+
+autoload -U compinit
+compinit
+
+bindkey "[3~"   delete-char
+bindkey "OH"    beginning-of-line
+bindkey "[H"    beginning-of-line
+bindkey "[1~"   beginning-of-line
+bindkey "[4~"   end-of-line
+bindkey "[F"    end-of-line
+bindkey "OF"    end-of-line
+bindkey "[1;5C" forward-word
+bindkey "OC"    forward-word
+bindkey "[1;5D" backward-word
+bindkey "OD"    backward-word
+
+local_config="$HOME/.zshrc-local"
+test -f "$local_config" && . "$local_config"
