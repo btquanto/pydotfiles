@@ -1,4 +1,5 @@
 config.json
 .virtual_environment/*
 *.pyc
+dotfiles
 dotfiles/*

@@ -3,12 +3,18 @@ set -e
 
 bin_dir="$(cd "$(dirname "$0")" && pwd)";
 home_dir="$(cd && pwd)";
-cd "$bin_dir";
 
 if [ ! -d "dotfiles" ];
 then
     mkdir dotfiles;
 fi;
+
+cd dotfiles;
+git init >/dev/null 2>&1;
+git add .;
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S");
+git commit -am "Version $timestamp";
+cd "$bin_dir";
 
 # Check if config.json exists
 if [ ! -f "config.json" ];
