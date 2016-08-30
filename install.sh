@@ -5,6 +5,11 @@ bin_dir="$(cd "$(dirname "$0")" && pwd)";
 home_dir="$(cd && pwd)";
 cd "$bin_dir";
 
+if [ ! -d "dotfiles" ];
+then
+    mkdir dotfiles;
+fi;
+
 # Check if config.json exists
 if [ ! -f "config.json" ];
 then
@@ -20,7 +25,7 @@ then
 	echo "Virtualenv is found"
 else
 	echo "Virtualenv is not found. Proceed with installing virtual environment";
-	sudo apt-get install python-virtualenv -y;	
+	sudo apt-get install python-virtualenv -y;
 
 	if hash virtualenv 2> /dev/null;
 	then
