@@ -3,7 +3,7 @@ from datetime import datetime
 from jinja2 import Environment, PackageLoader
 
 TEMPLATE_FOLDER = 'templates'
-BUILD_FOLDER = 'build'
+BUILD_FOLDER = 'dotfiles'
 BACKUP_FOLDER = 'backups'
 MODULE_FOLDER = 'modules'
 CONFIG_FILE = 'config.json'
@@ -40,7 +40,7 @@ def backup_file(home_path, backup_path, dot_file, stamp):
 		copy_file(home_path, backup_file_path)
 
 def main():
-	env = Environment(loader=PackageLoader('dotfiles', TEMPLATE_FOLDER)) 
+	env = Environment(loader=PackageLoader('dotfiles', TEMPLATE_FOLDER))
 
 	template_files = os.listdir(TEMPLATE_FOLDER)
 	bin_dir = sys.argv[1]
