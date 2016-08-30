@@ -1,5 +1,5 @@
-if [ -f /etc/.bash_init ]; then
-    . /etc/.bash_init
+if [ -f ~/.bash_init ]; then
+    . ~/.bash_init
 fi
 
 TMUX_ALIAS="tfox"
