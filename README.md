@@ -8,5 +8,5 @@ This works in Ubuntu 16.04. I don't guarantee other operating systems.
 
 Copy and paste for the lazy me:
 
-    git clone --recursive https://github.com/btquanto/dotfiles.git
-    ./dotfiles/install.sh
+    git clone --recursive https://github.com/btquanto/pydotfiles.git
+    ./pydotfiles/install.sh
