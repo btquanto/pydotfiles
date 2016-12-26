@@ -17,7 +17,7 @@ git commit -am "Version $timestamp" --author="Anonymous <anonymous@anonymous.com
 cd "$bin_dir";
 
 # Check if config.json exists
-if [ ! -f "config.json" ];
+if [ ! -f "config.json" ]
 then
    echo "Config file not found. Create your config.json file based on config.json.template";
    exit 0;
@@ -26,17 +26,22 @@ else
 fi;
 
 # Check if virtualenv exists. If not, install it. Exit if installation failed.
-if hash virtualenv 2> /dev/null;
+if hash virtualenv 2> /dev/null
 then
-	echo "Virtualenv is found"
+	echo "Virtualenv is found";
 else
 	echo "Virtualenv is not found. Proceed with installing virtual environment";
-    if [ "$EUID" -ne 0 ];
-        then apt-get install python-virtualenv -y;
+    if [ $(whoami) == "root" ]
+    then
+        apt-get install python-virtualenv -y;
     else
-        if hash sudo 2> /dev/null;
-            then sudo apt-get install python-virtualenv -y;
-        fi
+        if [ "$EUID" -ne 0 ]
+        then
+            if hash sudo 2> /dev/null
+            then
+                sudo apt-get install python-virtualenv -y;
+            fi;
+        fi;
     fi;
 
 	if hash virtualenv 2> /dev/null;
