@@ -13,7 +13,7 @@ cd dotfiles;
 git init >/dev/null 2>&1;
 git add .;
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S");
-git commit -am "Version $timestamp";
+git commit -am "Version $timestamp" || true; # ignore if command fail
 cd "$bin_dir";
 
 # Check if config.json exists
@@ -31,7 +31,13 @@ then
 	echo "Virtualenv is found"
 else
 	echo "Virtualenv is not found. Proceed with installing virtual environment";
-	sudo apt-get install python-virtualenv -y;
+    if [ "$EUID" -ne 0 ];
+        then apt-get install python-virtualenv -y;
+    else
+        if hash sudo 2> /dev/null;
+            then sudo apt-get install python-virtualenv -y;
+        fi
+    fi;
 
 	if hash virtualenv 2> /dev/null;
 	then
