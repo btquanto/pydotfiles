@@ -13,13 +13,13 @@ cd dotfiles;
 git init >/dev/null 2>&1;
 git add .;
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S");
-git commit -am "Version $timestamp" || true; # ignore if command fail
+git commit -am "Version $timestamp" --author="Anonymous <anonymous@anonymous.com>" || true; # ignore if command fail
 cd "$bin_dir";
 
 # Check if config.json exists
 if [ ! -f "config.json" ];
 then
-   echo "Config file not found. make your config.json file based on config.json.template";
+   echo "Config file not found. Create your config.json file based on config.json.template";
    exit 0;
 else
    echo "Config file found. Proceeding to install the dotfiles";
