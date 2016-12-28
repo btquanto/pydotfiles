@@ -18,8 +18,4 @@ fi
 #fi
 {% endif %}
 
-
-# Check if ssh is added
-#if [ "$DESKTOP_SESSION" == "" ]; then
-#    ssh-add -l &> /dev/null || eval `ssh-agent -s` && ssh-add
-#fi
+if ! [ $(locale | grep -i "LANG=en_US\.UTF-8") ]; then locale-gen en_US.UTF-8; fi && export LANG=en_US.UTF-8;

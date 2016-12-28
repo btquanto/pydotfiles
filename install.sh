@@ -13,7 +13,7 @@ cd dotfiles;
 git init >/dev/null 2>&1;
 git add .;
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S");
-git commit -am "Version $timestamp" --author="Anonymous <anonymous@anonymous.com>" || true; # ignore if command fail
+git commit -am "Version $timestamp" >/dev/null 2>&1 || true; # ignore if command fail
 cd "$bin_dir";
 
 # Check if config.json exists
