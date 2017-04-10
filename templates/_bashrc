@@ -4,18 +4,13 @@ fi
 
 TMUX_ALIAS="tfox"
 TMUX_SESSION_NAME="fox"
-
 alias "$TMUX_ALIAS"="(tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME"
 
-# Automatically start attach tmux session
-{% if auto_attach_tmux_session %}
-if [[ "$TERM" != "screen" ]]; then
+# Automatically start attach tmux session when accessing with ssh
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  if [[ "$TERM" != "screen" ]]; then
     (tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME;
+  fi
 fi
-{% else %}
-#if [[ "$TERM" != "screen" ]]; then
-#    (tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME;
-#fi
-{% endif %}
 
 if ! [ $(locale | grep -i "LANG=en_US\.UTF-8") ]; then locale-gen en_US.UTF-8; fi && export LANG=en_US.UTF-8;
