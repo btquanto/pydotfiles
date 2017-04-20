@@ -77,5 +77,11 @@ pip install -r requirements.txt
 
 python dotfiles.py "$bin_dir" "$home_dir";
 
+if ! [ -f ~/.bash_extras ]; then
+    echo "Generating '~/.bash_extras'"
+    touch ~/.bash_extras
+fi
+
 echo "Activate bashrc"
 source ~/.bashrc
+
