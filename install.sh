@@ -63,7 +63,7 @@ fi;
 if [ ! -f ".virtual_environment/bin/activate" ];
 then
 	echo "Virtual environment not installed. Creating a new virtual environment";
-	virtualenv .virtual_environment;
+	virtualenv .virtual_environment --python=python2;
 fi
 
 echo "Activating virtual environment";

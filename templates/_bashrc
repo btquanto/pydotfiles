@@ -3,7 +3,7 @@ if [ -f ~/.bash_init ]; then
 fi
 
 TMUX_ALIAS="tfox"
-TMUX_SESSION_NAME="fox"
+TMUX_SESSION_NAME=$USER
 alias "$TMUX_ALIAS"="(tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME"
 
 # Automatically start attach tmux session when accessing with ssh
