@@ -141,6 +141,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+if [ -f ~/.setproxy.sh ]; then
+    . ~/.setproxy.sh
+fi
+
 if [ "$color_prompt" = yes ]; then
     source ~/.git-prompt.sh
     PS1="$BGreen\u@\H$Color_Off:$BBlue\w $Red\$(__git_ps1)$Color_Off\$ "
