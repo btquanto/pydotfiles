@@ -141,8 +141,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ -f ~/.setproxy.sh ]; then
-    . ~/.setproxy.sh
+if [ -f ~/.utilities.sh ]; then
+    . ~/.utilities.sh
 fi
 
 if [ "$color_prompt" = yes ]; then

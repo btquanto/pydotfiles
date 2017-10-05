@@ -1,20 +1,25 @@
+# Initialize bash environment
 if [ -f ~/.bash_init ]; then
     . ~/.bash_init
 fi
 
-TMUX_ALIAS="tfox"
-TMUX_SESSION_NAME=$USER
-alias "$TMUX_ALIAS"="(tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME"
-
 # Automatically start attach tmux session when accessing with ssh
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   if [[ "$TERM" != "screen" ]]; then
-    (tmux has -t $TMUX_SESSION_NAME && tmux attach -t $TMUX_SESSION_NAME) || tmux new -s $TMUX_SESSION_NAME;
+    mux
   fi
 fi
 
-if ! [ $(locale | grep -i "LANG=en_US\.UTF-8") ]; then locale-gen en_US.UTF-8; fi && export LANG=en_US.UTF-8;
+if [[ "$TERM" == "screen" ]]; then
+  export PS1="$PS1\n"
+fi
 
+# Enforcing LANG=en_US.UTF-8
+if ! [ $(locale | grep -i "LANG=en_US\.UTF-8") ]; then
+  locale-gen en_US.UTF-8; 
+fi 
+
+export LANG=en_US.UTF-8;
 
 if [ -f ~/.bash_extras ]; then
     . ~/.bash_extras
