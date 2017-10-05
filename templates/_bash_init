@@ -142,15 +142,26 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ -f ~/.utilities.sh ]; then
-    . ~/.utilities.sh
+    source ~/.utilities.sh
+fi
+
+if [ -f ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
 fi
 
 if [ "$color_prompt" = yes ]; then
-    source ~/.git-prompt.sh
-    PS1="$BGreen\u@\H$Color_Off:$BBlue\w $Red\$(__git_ps1)$Color_Off\$ "
+    
+    PS1="$BGreen\u@\H$Color_Off:$BBlue\w$Red\$(__git_ps1)$Color_Off"
 else
-    PS1="$\u@\H:\w\$ "
+    PS1="$\u@\H:\w\$(__git_ps1)"
 fi
+
+if [[ "$TERM" == "screen" ]]; then
+  export PS1="$PS1\n\$ "
+else
+  export PS1="$PS1\$ "
+fi
+
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -164,13 +175,13 @@ esac
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+    source ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
+    source /etc/bash_completion
 fi
 

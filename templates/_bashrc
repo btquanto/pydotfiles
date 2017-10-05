@@ -1,6 +1,6 @@
 # Initialize bash environment
 if [ -f ~/.bash_init ]; then
-    . ~/.bash_init
+    source ~/.bash_init
 fi
 
 # Automatically start attach tmux session when accessing with ssh
@@ -8,10 +8,6 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   if [[ "$TERM" != "screen" ]]; then
     mux
   fi
-fi
-
-if [[ "$TERM" == "screen" ]]; then
-  export PS1="$PS1\n"
 fi
 
 # Enforcing LANG=en_US.UTF-8
@@ -22,5 +18,5 @@ fi
 export LANG=en_US.UTF-8;
 
 if [ -f ~/.bash_extras ]; then
-    . ~/.bash_extras
+    source ~/.bash_extras
 fi
