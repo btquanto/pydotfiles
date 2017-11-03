@@ -20,3 +20,9 @@ export LANG=en_US.UTF-8;
 if [ -f ~/.bash_extras ]; then
     source ~/.bash_extras
 fi
+
+function _handle_exit() {
+  history -a
+}
+
+trap _handle_exit EXIT;
