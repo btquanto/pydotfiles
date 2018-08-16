@@ -51,3 +51,7 @@ function mux() {
     fi
     (tmux has -t $session && tmux attach -t $session) || tmux new -s $session;
 }
+
+function truncate_docker_logs() {
+    sudo find /var/lib/docker/containers/ -type f -name '*-json.log' | xargs sudo truncate -s 0 {}
+}
