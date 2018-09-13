@@ -52,6 +52,17 @@ function mux() {
     (tmux has -t $session && tmux attach -t $session) || tmux new -s $session;
 }
 
+function line() {
+    _line=$1
+    _file=$2
+     sed -n "${_line},${_line}p;${_line}q" $_file
+}
+
 function truncate_docker_logs() {
     sudo find /var/lib/docker/containers/ -type f -name '*-json.log' | xargs sudo truncate -s 0 {}
+}
+
+function pipv() {
+    PACKAGE_JSON_URL="https://pypi.org/pypi/${1}/json"
+    curl -Ls "$PACKAGE_JSON_URL" | jq  -r '.releases | keys | .[]' | sort -V
 }
