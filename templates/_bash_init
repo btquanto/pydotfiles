@@ -150,7 +150,7 @@ if [ -f ~/.git-prompt.sh ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    
+
     PS1="$BGreen\u@\H$Color_Off:$BBlue\w$Red\$(__git_ps1)$Color_Off"
 else
     PS1="$\u@\H:\w\$(__git_ps1)"
@@ -185,3 +185,24 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
 fi
 
+SSH_ENV="$HOME/.ssh/._environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
