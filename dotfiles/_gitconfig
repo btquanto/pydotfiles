@@ -1,0 +1,34 @@
+[color]
+    ui = auto
+    diff = false
+    status=auto
+    branch=auto
+    interactive=auto
+[merge]
+	tool = vimdiff
+[diff]
+	tool = vimdiff
+[core]
+    autocrlf = false
+    excludesfile = ~/.gitignore
+    pager = vim -c 'set nonumber buftype=nofile' -
+	editor = vim
+[user]
+	name = ${GIT_USER}
+	email = ${GIT_EMAIL}
+[credential]
+	helper = cache --timeout=7200
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+[rerere]
+	enabled = true
+[push]
+	default = current
+[pull]
+	default = current
+[branch]
+	autosetuprebase = always
+[branch "master"]
+	rebase = true

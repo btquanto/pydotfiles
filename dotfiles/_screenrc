@@ -1,0 +1,8 @@
+startup_message off
+altscreen on
+
+hardstatus alwayslastline
+hardstatus string '%-w%n%f%t%+w%-=%H|%c'
+
+termcapinfo * ti@:te@
+term screen-256color
