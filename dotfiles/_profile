@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ -z "$BASH_VERSION" ]
+if [ -n "$BASH_VERSION" ]
 then
     # It means bash is started as a login shell
     . ~/.bashrc
