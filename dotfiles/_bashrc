@@ -7,7 +7,9 @@ fi
 # Automatically start attach tmux session when accessing with ssh
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   if [[ "$TERM" != screen* ]]; then
-    mux
+    if type mux &> /dev/null; then
+      mux;
+    fi
   fi
 fi
 
